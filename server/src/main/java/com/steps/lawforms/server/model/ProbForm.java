@@ -5,6 +5,7 @@
  */
 package com.steps.lawforms.server.model;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import lombok.Data;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import org.springframework.util.Base64Utils;
 
 /**
  *
@@ -30,7 +32,11 @@ public class ProbForm implements Serializable {
     private String lastName;
 
     private MultipartFile picture;
-
+    
+    private String pictureData;
+    
+    private final LocalDate today = LocalDate.now();
+    
     @NotNull(message = "Незаполено поле <Когда>")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
@@ -40,5 +46,8 @@ public class ProbForm implements Serializable {
 
     @Positive(message = "Число должно быть больше 0")
     private double amount;
-
+    
+    public String getName(){
+        return lastName + " " + firstName + " " + middleName;
+    }
 }

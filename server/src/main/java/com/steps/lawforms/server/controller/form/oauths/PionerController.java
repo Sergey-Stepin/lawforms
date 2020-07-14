@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.thymeleaf.context.Context;
 
 /**
@@ -39,6 +41,7 @@ import org.thymeleaf.context.Context;
 
 @Controller
 @RequestMapping("form/oauths/pioner")
+@SessionAttributes({"formParams", "fragmentPath", "formName"})
 public class PionerController {
 
     @Autowired
@@ -54,57 +57,67 @@ public class PionerController {
 
     @GetMapping
     public String getParameters(Model model) {
-        model.addAttribute("probForm", new ProbForm());
+        model.addAttribute("formParams", new ProbForm());
         return "form/oauths/pioner/parameters";
     }
 
     @PostMapping(params = {"_ok"})
     public String postParameters(
-            @Valid ProbForm application,
+            @Valid ProbForm formParams,
             Errors errors,
+            HttpServletResponse response,
             Model model) throws IOException {
 
         if (errors.hasErrors()) {
             return "form/oauths/pioner/parameters";
         }
 
-        String pictureData = Base64Utils.encodeToString(application.getPicture().getBytes());
+        prepareFromParams(formParams);
+        
+        //String pictureData = Base64Utils.encodeToString(formParams.getPicture().getBytes());
+        //formParams.setPictureData(Base64Utils.encodeToString(formParams.getPicture().getBytes()));
 
-        String name = application.getLastName() + " "
-                + application.getFirstName() + " "
-                + application.getMiddleName();
+//        String name = formParams.getLastName() + " "
+//                + formParams.getFirstName() + " "
+//                + formParams.getMiddleName();
 
-        model.addAttribute("name", name);
-        model.addAttribute("birthPlace", application.getBirthPlace().getRusName());
-        model.addAttribute("birthday", application.getBirthday());
-        model.addAttribute("today", LocalDate.now());
-        model.addAttribute("amount", application.getAmount());
-        model.addAttribute("pictureData", pictureData);
+//        model.addAttribute("name", name);
+//        model.addAttribute("birthPlace", formParams.getBirthPlace().getRusName());
+//        model.addAttribute("birthday", formParams.getBirthday());
+//        model.addAttribute("today", LocalDate.now());
+//        model.addAttribute("amount", formParams.getAmount());
+//        model.addAttribute("pictureData", pictureData);
 
-        return "form/oauths/pioner/form-frame";
-        //return "form/oauths/pioner/pioner_oath_template";
+        model.addAttribute("formParams", formParams);
+        model.addAttribute("formName", new String("PionerOath"));
+        model.addAttribute("fragmentPath", "form/oauths/pioner/pioner_oath_template");
+        
+        response.addHeader("Cache-Control", "no cache");
+        
+        return "form-frame";
     }
 
-    @PostMapping(params = {"_pdfview"})
-    public PdfView generateFile(
-            @ModelAttribute("probForm") ProbForm application,
-            Model model) throws IOException {
-
-        String pictureData = Base64Utils.encodeToString(application.getPicture().getBytes());
-
-        String name = application.getLastName() + " "
-                + application.getFirstName() + " "
-                + application.getMiddleName();
-
-        Context context = new Context();
-        context.setVariable("name", name);
-        context.setVariable("birthPlace", application.getBirthPlace().getRusName());
-        context.setVariable("birthday", application.getBirthday());
-        context.setVariable("today", LocalDate.now());
-        context.setVariable("amount", application.getAmount());
-        context.setVariable("pictureData", pictureData);
-
-        return new PdfView(templateToPdfService.prepareByteArrayOutputStream("form/oauths/pioner/pioner_oath_template", context));
+//    @PostMapping(params = {"_pdfview"})
+//    public PdfView generateFile(
+//            @ModelAttribute("formParams") ProbForm formParams,
+//            Model model) throws IOException {
+//
+//        prepareFromParams(formParams);
+//        
+//        Context context = new Context();
+////        context.setVariable("name", name);
+////        context.setVariable("birthPlace", application.getBirthPlace().getRusName());
+////        context.setVariable("birthday", application.getBirthday());
+////        context.setVariable("today", LocalDate.now());
+////        context.setVariable("amount", application.getAmount());
+////        context.setVariable("pictureData", pictureData);
+//
+//        context.setVariable("formParams", formParams);
+//
+//        return new PdfView(templateToPdfService.prepareByteArrayOutputStream("form/oauths/pioner/pioner_oath_template", context));
+//    }
+    
+    private void prepareFromParams(ProbForm formParams) throws IOException{
+        formParams.setPictureData(Base64Utils.encodeToString(formParams.getPicture().getBytes()));
     }
-
 }

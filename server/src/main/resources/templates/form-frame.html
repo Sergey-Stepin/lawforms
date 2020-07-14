@@ -20,7 +20,21 @@
                 </ul>
             </nav>
 
-            <section th:insert="${'form/oauths/pioner/pioner_oath_template'} :: formbody"> </section>            
+            <form 
+                th:method="POST"
+                th:object="${formParams}"
+                th:action="@{/form/frame/}">
+
+                <section>
+                    <p/>
+                    <input type="submit" value="Pdf View" name="_pdfview" />
+                    <input type="submit" value="Pdf Download" name="_pdfdownload" />                
+
+                </section>
+
+                <section th:insert="${fragmentPath} :: formbody"> </section>            
+
+            </form>
 
         </section>
 
