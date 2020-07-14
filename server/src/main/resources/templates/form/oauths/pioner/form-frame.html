@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>LawForms</title>
+        <link th:href="@{/css/mainstyles.css}" rel="stylesheet" />
+    </head>
+
+    <body>
+        <header>
+            Law Forms
+        </header>
+
+        <section style="margin: 0; padding: 0;">
+
+            <nav style="margin: 0; padding: 0;">
+                <ul>
+                    <li class="general-design"><a th:href="@{/index.html}">| Домой</a></li>
+                    <li class="general-design"><a th:href="@{/contacts.html}">| Контакты</a></li>
+                </ul>
+            </nav>
+
+            <section th:insert="${'form/oauths/pioner/pioner_oath_template'} :: formbody"> </section>            
+
+        </section>
+
+        <footer>
+
+        </footer>
+
+    </body>
+
+</html>

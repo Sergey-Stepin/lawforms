@@ -1,0 +1,57 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: rgb(74, 124, 74);
+    color: white;
+    margin: 10px 0;
+    padding: 10px 10px;
+    font-size: 50px;
+}
+
+section {
+    margin: 10px;
+    padding: 10px;
+    font-size: large;
+    font-weight: bold;
+    color: rgb(74, 124, 74);
+}
+
+section.form-parameters {
+    margin: 10px 10px;
+    padding: 10px;
+    font-size: initial;
+    font-weight: initial;
+}
+
+section.form-text {
+    margin: 5px;
+    padding: 5px;
+    font-size: initial;
+    font-weight: normal;
+    color: black;
+}
+
+footer {
+    background-color: rgb(74, 124, 74);
+    color: white;
+    padding: 20px 40px;
+}
+ul{
+    list-style-type: none;
+}
+
+li.general-design{
+    font-size: initial;
+    font-weight: normal;
+    color: rgb(74, 124, 74);            
+    padding: 10px;
+    display: inline-block;
+}
+
+a{
+    color: rgb(74, 124, 74);                
+}

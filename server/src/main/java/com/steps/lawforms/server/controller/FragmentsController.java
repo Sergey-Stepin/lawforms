@@ -6,6 +6,7 @@
 package com.steps.lawforms.server.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -14,11 +15,18 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 
 @Controller
-public class HomeController {
+public class FragmentsController {
     
-    @GetMapping({"/", "/home"})
-    public String getHome(){
-        return "home";
+    @GetMapping("/fragments")
+    public String getHome() {
+        return "fragments/fragments.html";
+    }
+
+    @GetMapping("/test")
+    public String getTest(Model model) {
+        
+        model.addAttribute("paramPath", "fragments/general.html");
+        return "fragments/test.html";
     }
     
 }

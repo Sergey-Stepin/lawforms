@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>LawForms</title>
+        <link th:href="@{/css/mainstyles.css}" rel="stylesheet" />
+    </head>
+
+    <body>
+        <header>
+            Law Forms
+        </header>
+
+        <section style="margin: 0; padding: 0;">
+
+            <nav style="margin: 0; padding: 0;">
+                <ul>
+                    <li class="general-design"><a th:href="@{/index.html}">| Домой</a></li>
+                    <li class="general-design"><a th:href="@{/contacts.html}">| Контакты</a></li>
+                </ul>
+            </nav>
+
+            <section class="form-parameters">
+
+                <h1>Исходные данные:</h1>                
+                <form 
+                    enctype="multipart/form-data"
+                    th:method="POST"
+                    th:action="@{/form/oauths/pioner/}"
+                    th:object="${probForm}">
+
+                    <p/>Введите Ф.И.О.:
+                    <p/>
+                    <input type="text" th:field="*{lastName}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:style="${'color: red;'}"/>
+
+                    <p/>
+                    <input type="text" th:field="*{firstName}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:style="${'color: red;'}"/>
+
+
+                    <p/>
+                    <input type="text" th:field="*{middleName}"/>
+
+                    <p/>Выбере когда?
+                    <input type="date" th:field="*{birthday}" placeholder="0.00"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}" th:style="${'color: red;'}"/>
+
+                    <p/>Выберете где?
+                    <select th:field ="*{birthPlace}">
+                        <option th:each = "place : ${availableBirthPlaces}"
+                                th:value ="${place}"
+                                th:text ="${place.rusName}" />
+                    </select>
+
+
+                    <p/>Введите сколько (нежалко)?
+                    <input type="text" th:field="*{amount}" placeholder="666.13"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" th:style="${'color: red;'}"/>
+
+                    <p/>
+                    <label>Выберете фото:</label>
+                    <input type="file" name = "picture" th:field="*{picture}"/>
+
+                    <p/>
+                    <input type="submit" value="Cancel" name="_cancel"/>
+                    <input type="submit" value="Ok" name="_ok" />
+                    <input type="submit" value="PdfView" name="_pdfview" />
+
+                </form>
+
+            </section>
+        
+        </section>
+
+        <footer>
+
+        </footer>
+
+    </body>
+
+</html>

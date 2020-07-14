@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>LawForms</title>
+        <link rel="stylesheet" href="../css/mainstyles.css"/>
     </head>
     <body>
 
@@ -14,7 +15,7 @@
             <form 
 		enctype="multipart/form-data"
                 th:method="POST"
-                th:action="@{/form/prob}"
+                th:action="@{/form/oauths/pioner/}"
                 th:object="${probForm}">
                 
                 <p/>Введите Ф.И.О.:

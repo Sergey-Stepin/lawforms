@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.steps.lawforms.server.controller;
+package com.steps.lawforms.server.controller.form.oauths;
 
 //import com.itextpdf.text.DocumentException;
 import com.steps.lawforms.server.model.BirthPlace;
@@ -38,8 +38,8 @@ import org.thymeleaf.context.Context;
  */
 
 @Controller
-@RequestMapping("form/prob")
-public class ProbController {
+@RequestMapping("form/oauths/pioner")
+public class PionerController {
 
     @Autowired
     private PdfService templateToPdfService;
@@ -53,19 +53,19 @@ public class ProbController {
     }
 
     @GetMapping
-    public String getApplication(Model model) {
+    public String getParameters(Model model) {
         model.addAttribute("probForm", new ProbForm());
-        return "form/prob";
+        return "form/oauths/pioner/parameters";
     }
 
     @PostMapping(params = {"_ok"})
-    public String postApplication(
+    public String postParameters(
             @Valid ProbForm application,
             Errors errors,
             Model model) throws IOException {
 
         if (errors.hasErrors()) {
-            return "form/prob";
+            return "form/oauths/pioner/parameters";
         }
 
         String pictureData = Base64Utils.encodeToString(application.getPicture().getBytes());
@@ -81,7 +81,8 @@ public class ProbController {
         model.addAttribute("amount", application.getAmount());
         model.addAttribute("pictureData", pictureData);
 
-        return "form/oath";
+        return "form/oauths/pioner/form-frame";
+        //return "form/oauths/pioner/pioner_oath_template";
     }
 
     @PostMapping(params = {"_pdfview"})
@@ -103,7 +104,7 @@ public class ProbController {
         context.setVariable("amount", application.getAmount());
         context.setVariable("pictureData", pictureData);
 
-        return new PdfView(templateToPdfService.prepareByteArrayOutputStream("form/oath", context));
+        return new PdfView(templateToPdfService.prepareByteArrayOutputStream("form/oauths/pioner/pioner_oath_template", context));
     }
 
 }
