@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>LawForms</title>
+        <link th:href="@{/css/mainstyles.css}" rel="stylesheet" />
+    </head>
+
+    <body>
+        <header>
+            Law Forms
+        </header>
+
+        <section style="margin: 0; padding: 0;">
+
+            <nav style="margin: 0; padding: 0;">
+                <ul>
+                    <li class="general-design"><a th:href="@{/index.html}">| Домой</a></li>
+                    <li class="general-design"><a th:href="@{/contacts.html}">| Контакты</a></li>
+                </ul>
+            </nav>
+
+            <section class="form-parameters">
+
+                <h1>Договор купли-продажи автомобиля (между физическими лицами)</h1>
+                <h2>Шаг 5 из 5. Условия договора</h2>
+
+                <form 
+                    enctype="multipart/form-data"
+                    th:method="POST"
+                    th:object="${formParams}"                    
+                    th:action="@{/form/naturalperson/agreement/autodeal/general_terms}">
+
+                    <p/>
+                    <label>Место заключения договора</label>
+                    <input type="text" th:field="*{venue}"/>
+
+                    <p/>
+                    <label>Дата договора</label>
+                    <input type="date" th:field="*{dealDate}"/>
+                    
+                    <p/>
+                    <label>Цена цифрами</label>
+                    <input type="text" th:field="*{price}"/>
+
+                    <p/>
+                    <label>Цена прописью</label>
+                    <input type="text" th:field="*{priceText}"/>
+                    
+                    <p/>
+                    <input type="submit" value="Назад" name="_prev" />                    
+                    <input type="submit" value="Далее" name="_next"/>
+
+                </form>
+
+            </section>
+        
+        </section>
+
+        <footer>
+
+        </footer>
+
+    </body>
+
+</html>

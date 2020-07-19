@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>LawForms</title>
+        <link th:href="@{/css/mainstyles.css}" rel="stylesheet" />
+    </head>
+
+    <body>
+        <header>
+            Law Forms
+        </header>
+
+        <section style="margin: 0; padding: 0;">
+
+            <nav style="margin: 0; padding: 0;">
+                <ul>
+                    <li class="general-design"><a th:href="@{/index.html}">| Домой</a></li>
+                    <li class="general-design"><a th:href="@{/contacts.html}">| Контакты</a></li>
+                </ul>
+            </nav>
+
+            <section class="form-parameters">
+
+                <h1>Договор купли-продажи автомобиля (между физическими лицами)</h1>
+                <h2>Шаг 3 из 5. Покупатель</h2>
+
+                <form 
+                    enctype="multipart/form-data"
+                    th:method="POST"
+                    th:object="${formParams}"                    
+                    th:action="@{/form/naturalperson/agreement/autodeal/buyer_params}">
+
+                    <p/>
+                    <label>Фамилия</label>
+                    <input type="text" th:field="*{buyer.lastName}"/>
+                    
+                    <p/>
+                    <label>Имя</label>
+                    <input type="text" th:field="*{buyer.firstName}"/>
+                    
+                    <p/>
+                    <label>Отчество</label>
+                    <input type="text" th:field="*{buyer.middleName}"/>
+                    
+                    <p/>
+                    <label>Дата рождения</label>
+                    <input type="date" th:field="*{buyer.birthday}"/>
+                    
+                    <p/>
+                    <label>Серия, номер паспорта</label>
+                    <input type="text" th:field="*{buyer.passport.firstSerialNum}" pattern="\d{2}" size="2"/>-
+                    <input type="text" th:field="*{buyer.passport.secondSerialNum}" pattern="\d{2}" size="2"/>-
+                    <input type="text" th:field="*{buyer.passport.number}" pattern="\d{6}" size="6"/>
+                    
+                    <p/>
+                    <label>Дата выдачи паспорта</label>
+                    <input type="date" th:field="*{buyer.passport.issued}"/>
+
+                    <p/>
+                    <label>Кем выдан</label>
+                    <input type="text" th:field="*{buyer.passport.issuer}"/>
+
+                    <p/>
+                    <label>Код подразделения</label>
+                    <input type="text" th:field="*{buyer.passport.issuerDepartmentCode}"/>
+
+                    <p/>
+                    <label>Адрес проживания (по паспорту)</label>
+                    <input type="text" th:field="*{buyer.passport.currentAddress}"/>
+
+                    <p/>
+                    <input type="submit" value="Назад" name="_prev" />                    
+                    <input type="submit" value="Далее" name="_next"/>
+
+                </form>
+
+            </section>
+        
+        </section>
+
+        <footer>
+
+        </footer>
+
+    </body>
+
+</html>
