@@ -5,7 +5,7 @@
  */
 package com.steps.lawforms.server.controller.form;
 
-import com.steps.lawforms.server.model.ProbForm;
+import com.steps.lawforms.server.model.iFormParameters;
 import com.steps.lawforms.server.service.PdfService;
 import com.steps.lawforms.server.vew.PdfView;
 import java.io.IOException;
@@ -13,11 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.HttpSessionRequiredException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,15 +41,22 @@ public class FormFrameController {
 
     private final static Logger LOGGER = LogManager.getLogger();
 
+    @ExceptionHandler(HttpSessionRequiredException.class)
+    public String handle(HttpSessionRequiredException ex) {
+        ex.printStackTrace();
+        LOGGER.error(ex.toString());
+        return "redirect:/";
+    }
+    
     @PostMapping(params = {"_pdfview"})
     public PdfView viewPdfFile(
-            @ModelAttribute("formParams") ProbForm formParams,
+            @ModelAttribute("formParams") iFormParameters formParams,
             @ModelAttribute("fragmentPath") String fragmentPath,
             HttpServletResponse response,
-            //SessionStatus status,
+            SessionStatus status,
             Model model) throws IOException {
 
-        //status.setComplete();
+        status.setComplete();
 
         LOGGER.debug("### fragmentPath=" + fragmentPath);
         LOGGER.debug("### formParams=" + formParams);
@@ -64,13 +72,13 @@ public class FormFrameController {
 
     @PostMapping(params = {"_pdfdownload"})
     public ResponseEntity<StreamingResponseBody> downloadPdfFile(
-            @ModelAttribute("formParams") ProbForm formParams,
+            @ModelAttribute("formParams") iFormParameters formParams,
             @ModelAttribute("formName") String formName,
             @ModelAttribute("fragmentPath") String fragmentPath,
-            //SessionStatus status,
+            SessionStatus status,
             Model model) throws IOException {
 
-        //status.setComplete();
+        status.setComplete();
 
         LOGGER.debug("### fragmentPath=" + fragmentPath);
         LOGGER.debug("### formParams=" + formParams);

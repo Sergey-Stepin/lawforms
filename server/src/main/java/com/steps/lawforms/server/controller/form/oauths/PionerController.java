@@ -9,13 +9,8 @@ package com.steps.lawforms.server.controller.form.oauths;
 import com.steps.lawforms.server.model.BirthPlace;
 import com.steps.lawforms.server.model.ProbForm;
 import com.steps.lawforms.server.service.PdfService;
-import com.steps.lawforms.server.vew.PdfView;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +27,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.thymeleaf.context.Context;
 
 /**
  *
@@ -54,16 +48,20 @@ public class PionerController {
         return Stream.of(BirthPlace.values())
                 .collect(Collectors.toList());
     }
+    
+    @ModelAttribute("formParams")
+    public ProbForm formParams(){
+        return new ProbForm();
+    }
 
     @GetMapping
     public String getParameters(Model model) {
-        model.addAttribute("formParams", new ProbForm());
         return "form/oauths/pioner/parameters";
     }
 
     @PostMapping(params = {"_ok"})
     public String postParameters(
-            @Valid ProbForm formParams,
+            @Valid @ModelAttribute("formParams") ProbForm formParams,
             Errors errors,
             HttpServletResponse response,
             Model model) throws IOException {

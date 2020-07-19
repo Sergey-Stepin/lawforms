@@ -49,25 +49,25 @@
                     
                     <p/>
                     <label>Серия, номер паспорта</label>
-                    <input type="text" th:field="*{buyer.passport.firstSerialNum}" pattern="\d{2}" size="2"/>-
-                    <input type="text" th:field="*{buyer.passport.secondSerialNum}" pattern="\d{2}" size="2"/>-
-                    <input type="text" th:field="*{buyer.passport.number}" pattern="\d{6}" size="6"/>
+                    <input type="text" th:field="*{buyerPassport.firstSerialNum}" pattern="\d{2}" size="2"/>-
+                    <input type="text" th:field="*{buyerPassport.secondSerialNum}" pattern="\d{2}" size="2"/>-
+                    <input type="text" th:field="*{buyerPassport.number}" pattern="\d{6}" size="6"/>
                     
                     <p/>
                     <label>Дата выдачи паспорта</label>
-                    <input type="date" th:field="*{buyer.passport.issued}"/>
+                    <input type="date" th:field="*{buyerPassport.issued}"/>
 
                     <p/>
                     <label>Кем выдан</label>
-                    <input type="text" th:field="*{buyer.passport.issuer}"/>
+                    <input type="text" th:field="*{buyerPassport.issuer}"/>
 
                     <p/>
                     <label>Код подразделения</label>
-                    <input type="text" th:field="*{buyer.passport.issuerDepartmentCode}"/>
+                    <input type="text" th:field="*{buyerPassport.issuerDepartmentCode}"/>
 
                     <p/>
                     <label>Адрес проживания (по паспорту)</label>
-                    <input type="text" th:field="*{buyer.passport.currentAddress}"/>
+                    <input type="text" th:field="*{buyerPassport.currentAddress}"/>
 
                     <p/>
                     <input type="submit" value="Назад" name="_prev" />                    

@@ -5,7 +5,8 @@
  */
 package com.steps.lawforms.server.model.common;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,17 +18,24 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Data
 public class Person {
     
+    private static final DateTimeFormatter DAY_MONTH_YEAR_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    
     private String firstName;
     private String middleName;    
     private String lastName;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date birthday; 
+    private LocalDate birthday; 
     
-    private Passport passport;
-        
     public String getFIO(){
-        return lastName + " " + firstName + " " + lastName;
+        return lastName + " " + firstName + " " + middleName;
     }
-            
+
+    public String getShortFIO(){
+        return lastName + " " + firstName.charAt(0) + "." + middleName.charAt(0) + ".";
+    }
+    
+    public String formattedBirthday(){
+        return DAY_MONTH_YEAR_FORMATTER.format(birthday);
+    }
 }

@@ -5,7 +5,8 @@
  */
 package com.steps.lawforms.server.model.common;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,6 +18,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Data
 public class Passport {
     
+    private static final DateTimeFormatter DAY_MONTH_YEAR_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");    
+    
     private String firstSerialNum;
     
     private String secondSerialNum;
@@ -24,11 +27,20 @@ public class Passport {
     private String number;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date issued;
+    private LocalDate issued;
     
     private String issuer;
     
     private String issuerDepartmentCode;
     
     private String currentAddress;
+    
+    public String getFullPassportNum(){
+        return firstSerialNum + " " + secondSerialNum + " " + number;
+    }
+    
+    public String formattedIssued(){
+        return DAY_MONTH_YEAR_FORMATTER.format(issued);
+    }
+    
 }

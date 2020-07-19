@@ -7,8 +7,13 @@ package com.steps.lawforms.server.model.naturalperson.agreement.autodeal;
 
 import com.steps.lawforms.server.model.common.Passport;
 import com.steps.lawforms.server.model.common.Person;
+import com.steps.lawforms.server.model.iFormParameters;
 import com.steps.lawforms.server.model.naturalperson.agreement.autodeal.vehicle.VehicleTechData;
-import java.util.Date;
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.validation.constraints.NotBlank;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,29 +23,35 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 
 @Data
-public class AutoDeal {
+public class AutoDeal implements iFormParameters, Serializable{
+    
+    private static final DateTimeFormatter DAY_MONTH_YEAR_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     
     private String venue;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dealDate;
+    private LocalDate dealDate = LocalDate.now();
     
     private double price;
-    private String priceText;
-
+    private double priceText;
+    
     private Person seller;
-    private Passport sellPassport;
+    
+    private Passport sellerPassport;
     
     private Person buyer;
     private Passport buyerPassport;
     
     private VehicleTechData vehicleTechData;
-    
+
     private boolean immidiateTransfer;
+    
     private int daysForTransfer; 
     
     private boolean immidiatePayment;
     private int daysForPayment; 
     
-    
+    public String formattedDealDate(){
+        return DAY_MONTH_YEAR_FORMATTER.format(dealDate);
+    }
 }

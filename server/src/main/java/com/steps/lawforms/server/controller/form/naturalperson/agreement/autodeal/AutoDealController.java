@@ -7,18 +7,26 @@ package com.steps.lawforms.server.controller.form.naturalperson.agreement.autode
 
 import com.steps.lawforms.server.model.naturalperson.agreement.autodeal.AutoDeal;
 import com.steps.lawforms.server.model.naturalperson.agreement.autodeal.vehicle.VehicleCategory;
+import com.steps.lawforms.server.model.naturalperson.agreement.autodeal.vehicle.VehicleTechData;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 /**
  *
@@ -35,6 +43,11 @@ public class AutoDealController {
     public AutoDeal formParams() {
         return new AutoDeal();
     }
+    
+//    @ModelAttribute("vehicleTechData")
+//    public VehicleTechData vehicleTechData() {
+//        return new VehicleTechData();
+//    }
 
     @ModelAttribute("categories")
     public List<VehicleCategory> vehicleCategory() {
@@ -48,12 +61,23 @@ public class AutoDealController {
     }
 
     @PostMapping(value = "/vehicle_params", params = {"_prev"})
-    public String postVehicleParamsPrev() {
+    public String postVehicleParamsPrev(SessionStatus status) {
+        status.setComplete();
         return "redirect:/form-categories/aggreements.html";
     }
 
     @PostMapping(value = "/vehicle_params", params = {"_next"})
-    public String postVehicleParamsNext(@ModelAttribute("formParams") AutoDeal formParams) {
+    public String postVehicleParamsNext(
+            //@ModelAttribute("formParams") AutoDeal formParams,
+            //@Valid @ModelAttribute("vehicleTechData") VehicleTechData vehicleTechData,
+            //Errors errors,
+            @ModelAttribute("formParams") AutoDeal formParams,
+            BindingResult result) {
+
+//        if (errors.hasErrors()) {
+//            return "form/naturalperson/agreement/autodeal/vehicle_params";
+//        }
+        
         return "form/naturalperson/agreement/autodeal/seller_params";
     }
 
@@ -105,13 +129,13 @@ public class AutoDealController {
 
         System.out.println("### AutoDeal formParams=" + formParams);
 
-        if ( ! formParams.isImmidiateTransfer()) {
+        if (!formParams.isImmidiateTransfer()) {
             return "form/naturalperson/agreement/autodeal/transfer_terms";
-            
-        } else if ( ! formParams.isImmidiatePayment()) {
+
+        } else if (!formParams.isImmidiatePayment()) {
             return "form/naturalperson/agreement/autodeal/payment_terms";
-            
-        } else{
+
+        } else {
             return postResult(model);
         }
 
@@ -126,11 +150,11 @@ public class AutoDealController {
     public String postTransferTermsNext(
             Model model,
             @ModelAttribute("formParams") AutoDeal formParams) {
-        
-        if ( ! formParams.isImmidiatePayment()) {
+
+        if (!formParams.isImmidiatePayment()) {
             return "form/naturalperson/agreement/autodeal/payment_terms";
-            
-        } else{
+
+        } else {
             return postResult(model);
         }
 
@@ -145,15 +169,15 @@ public class AutoDealController {
     public String postPaymentTermsNext(
             Model model,
             @ModelAttribute("formParams") AutoDeal formParams) {
-        
+
         return postResult(model);
 
     }
-    
-    private String postResult(Model model){
+
+    private String postResult(Model model) {
         model.addAttribute("formName", new String("AutoDeal"));
         model.addAttribute("fragmentPath", "form/naturalperson/agreement/autodeal/autodeal_template");
-        
+
         return "form-frame";
     }
 }

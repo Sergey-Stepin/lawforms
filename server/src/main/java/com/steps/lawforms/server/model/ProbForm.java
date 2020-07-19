@@ -14,14 +14,13 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import org.springframework.util.Base64Utils;
 
 /**
  *
  * @author stepin
  */
 @Data
-public class ProbForm implements Serializable {
+public class ProbForm implements iFormParameters, Serializable {
 
     @NotBlank(message = "Незаполено поле <Имя>")
     private String firstName;
