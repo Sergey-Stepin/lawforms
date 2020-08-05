@@ -28,24 +28,28 @@
                 <form 
                     enctype="multipart/form-data"
                     th:method="POST"
-                    th:object="${formParams}"                    
+                    th:object="${deal}"                    
                     th:action="@{/form/naturalperson/agreement/autodeal/general_terms}">
 
                     <p/>
                     <label>Место заключения договора</label>
                     <input type="text" th:field="*{venue}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('venue')}" th:errors="*{venue}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Дата договора</label>
                     <input type="date" th:field="*{dealDate}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('dealDate')}" th:errors="*{dealDate}" th:style="${'color: red;'}"/>
                     
                     <p/>
                     <label>Цена цифрами</label>
                     <input type="text" th:field="*{price}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('price')}" th:errors="*{price}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Цена прописью</label>
                     <input type="text" th:field="*{priceText}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('priceText')}" th:errors="*{priceText}" th:style="${'color: red;'}"/>
                     
                     <p/>
                     <input type="submit" value="Назад" name="_prev" />                    

@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 /**
  *
@@ -49,19 +50,19 @@ public class PionerController {
                 .collect(Collectors.toList());
     }
     
-    @ModelAttribute("formParams")
-    public ProbForm formParams(){
+    @ModelAttribute("probForm")
+    public ProbForm probForm(){
         return new ProbForm();
     }
 
     @GetMapping
-    public String getParameters(Model model) {
+    public String getParameters() {
         return "form/oauths/pioner/parameters";
     }
 
     @PostMapping(params = {"_ok"})
     public String postParameters(
-            @Valid @ModelAttribute("formParams") ProbForm formParams,
+            @Valid @ModelAttribute("probForm") ProbForm probForm,
             Errors errors,
             HttpServletResponse response,
             Model model) throws IOException {
@@ -70,23 +71,9 @@ public class PionerController {
             return "form/oauths/pioner/parameters";
         }
 
-        prepareFromParams(formParams);
+        prepareFromParams(probForm);
         
-        //String pictureData = Base64Utils.encodeToString(formParams.getPicture().getBytes());
-        //formParams.setPictureData(Base64Utils.encodeToString(formParams.getPicture().getBytes()));
-
-//        String name = formParams.getLastName() + " "
-//                + formParams.getFirstName() + " "
-//                + formParams.getMiddleName();
-
-//        model.addAttribute("name", name);
-//        model.addAttribute("birthPlace", formParams.getBirthPlace().getRusName());
-//        model.addAttribute("birthday", formParams.getBirthday());
-//        model.addAttribute("today", LocalDate.now());
-//        model.addAttribute("amount", formParams.getAmount());
-//        model.addAttribute("pictureData", pictureData);
-
-        model.addAttribute("formParams", formParams);
+        model.addAttribute("formParams", probForm);
         model.addAttribute("formName", new String("PionerOath"));
         model.addAttribute("fragmentPath", "form/oauths/pioner/pioner_oath_template");
         
@@ -95,27 +82,7 @@ public class PionerController {
         return "form-frame";
     }
 
-//    @PostMapping(params = {"_pdfview"})
-//    public PdfView generateFile(
-//            @ModelAttribute("formParams") ProbForm formParams,
-//            Model model) throws IOException {
-//
-//        prepareFromParams(formParams);
-//        
-//        Context context = new Context();
-////        context.setVariable("name", name);
-////        context.setVariable("birthPlace", application.getBirthPlace().getRusName());
-////        context.setVariable("birthday", application.getBirthday());
-////        context.setVariable("today", LocalDate.now());
-////        context.setVariable("amount", application.getAmount());
-////        context.setVariable("pictureData", pictureData);
-//
-//        context.setVariable("formParams", formParams);
-//
-//        return new PdfView(templateToPdfService.prepareByteArrayOutputStream("form/oauths/pioner/pioner_oath_template", context));
-//    }
-    
-    private void prepareFromParams(ProbForm formParams) throws IOException{
-        formParams.setPictureData(Base64Utils.encodeToString(formParams.getPicture().getBytes()));
+    private void prepareFromParams(ProbForm probForm) throws IOException{
+        probForm.setPictureData(Base64Utils.encodeToString(probForm.getPicture().getBytes()));
     }
 }

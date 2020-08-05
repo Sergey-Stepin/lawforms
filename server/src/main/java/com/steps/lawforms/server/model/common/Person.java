@@ -7,6 +7,9 @@ package com.steps.lawforms.server.model.common;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,10 +23,17 @@ public class Person {
     
     private static final DateTimeFormatter DAY_MONTH_YEAR_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     
+    @NotEmpty(message = "Незаполено поле")
     private String firstName;
+    
+    @NotEmpty(message = "Незаполено поле")
     private String middleName;    
+    
+    @NotEmpty(message = "Незаполено поле")
     private String lastName;
     
+    @Past
+    @NotNull(message = "Незаполено поле")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday; 
     

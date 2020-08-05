@@ -27,72 +27,86 @@
                 <form 
                     enctype="multipart/form-data"
                     th:method="POST"
-                    th:object="${formParams}"                    
+                    th:object="${vehicleTechData}"
                     th:action="@{/form/naturalperson/agreement/autodeal/vehicle_params}">
 
                     <p/>
                     <label>Марка, модель транспортного средства</label>
-                    <input type="text" th:field="*{vehicleTechData.model}"/>
-                    <span class="validationError" th:if="${#fields.hasErrors('vehicleTechData.model')}" th:errors="*{vehicleTechData.model}" th:style="${'color: red;'}"/>
+                    <input type="text" th:field="*{model}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('model')}" th:errors="*{model}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Государственный номер</label>
-                    <input type="text" th:field="*{vehicleTechData.numberOfStateRegistration}"/>
+                    <input type="text" th:field="*{numberOfStateRegistration}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('numberOfStateRegistration')}" th:errors="*{numberOfStateRegistration}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Идентификационный номер (VIN)</label>
-                    <input type="text" th:field="*{vehicleTechData.vin}"/>
+                    <input type="text" th:field="*{vin}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('vin')}" th:errors="*{vin}" th:style="${'color: red;'}"/>
                     
                     <p/>
                     <label>Наименование (тип транспортного средства)</label>
-                    <input type="text" th:field="*{vehicleTechData.name}"/>
+                    <input type="text" th:field="*{name}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:style="${'color: red;'}"/>
 
                     <p/>Категория транспортного средства
-                    <select th:field ="*{vehicleTechData.category}">
+                    <select th:field ="*{category}">
                         <option th:each = "c : ${categories}"
                                 th:value ="${c}"
                                 th:text ="${c.fullName}" />
                     </select>
+                    <span class="validationError" th:if="${#fields.hasErrors('category')}" th:errors="*{category}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Год изготовления транспортного средства</label>
-                    <input type="number" th:field="*{vehicleTechData.yearOfIssuing}" min="1900" value="2020" step="1"/>
+                    <input type="number" th:field="*{yearOfIssuing}" min="1900" value="2020" step="1"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('yearOfIssuing')}" th:errors="*{yearOfIssuing}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Модель, номер двигателя</label>
-                    <input type="text" th:field="*{vehicleTechData.engineModel}"/>
+                    <input type="text" th:field="*{engineModel}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('engineModel')}" th:errors="*{engineModel}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Шасси (рама) номер</label>
-                    <input type="text" th:field="*{vehicleTechData.chassis}"/>
+                    <input type="text" th:field="*{chassis}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('chassis')}" th:errors="*{chassis}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Кузов (кабина, прицеп) номер</label>
-                    <input type="text" th:field="*{vehicleTechData.bodyNumber}"/>
+                    <input type="text" th:field="*{bodyNumber}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('bodyNumber')}" th:errors="*{bodyNumber}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Цвет кузова</label>
-                    <input type="text" th:field="*{vehicleTechData.bodyColor}"/>
+                    <input type="text" th:field="*{bodyColor}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('bodyColor')}" th:errors="*{bodyColor}" th:style="${'color: red;'}"/>
                     
                     <p/>
                     <label>Мощность двигателя</label>
-                    <input type="text" th:field="*{vehicleTechData.enginePower}"/>
+                    <input type="text" th:field="*{enginePower}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('enginePower')}" th:errors="*{enginePower}" th:style="${'color: red;'}"/>
                     
                     <p/>
                     <label>Рабочий объем двигателя</label>
-                    <input type="number" th:field="*{vehicleTechData.engineVolume}" placeholder="00.00"/>
+                    <input type="text" th:field="*{engineVolume}" placeholder="00.00"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('engineVolume')}" th:errors="*{engineVolume}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Тип двигателя</label>
-                    <input type="text" th:field="*{vehicleTechData.engineType}"/>
+                    <input type="text" th:field="*{engineType}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('engineType')}" th:errors="*{engineType}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Паспорт транспортного средства</label>
-                    <input type="text" th:field="*{vehicleTechData.vehiclePassport}"/>
+                    <input type="text" th:field="*{vehiclePassport}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('vehiclePassport')}" th:errors="*{vehiclePassport}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Наименование организации, выдавшей паспорт</label>
-                    <input type="text" th:field="*{vehicleTechData.vehiclePassportIssuer}"/>
+                    <input type="text" th:field="*{vehiclePassportIssuer}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('vehiclePassportIssuer')}" th:errors="*{vehiclePassportIssuer}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <input type="submit" value="Назад" name="_prev" />                    

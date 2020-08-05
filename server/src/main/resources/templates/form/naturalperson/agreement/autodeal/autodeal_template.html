@@ -12,7 +12,7 @@
                 Договор купли-продажи автомобиля (между физическими лицами)
             </h4>
 
-            <p style="text-align: center; max-width: 620px" > 
+            <p style="text-align: center; max-width: 620px; font-size: smaller" > 
                 <b><span th:text="${formParams.venue}" /></b> 
                 <b><span th:text="${formParams.formattedDealDate()}" /></b>
             </p>
@@ -35,7 +35,7 @@
                 дата выдачи <b><span th:text="${formParams.buyerPassport.formattedIssued()}"/></b>,
                 код подразделения <b><span th:text="${formParams.buyerPassport.issuerDepartmentCode}"/></b>, 
                 проживающий по адресу: <b><span th:text="${formParams.buyerPassport.currentAddress}"/></b>, 
-                именуемый в дальнейшем "Продавец", с одной стороны и
+                именуемый в дальнейшем "Продавец", с другой стороны, а вместе именуемые "Стороны", заключили договор о нижеследующем:
             </p>
 
             <h4 style="text-align:center ; max-width: 620px">
@@ -65,7 +65,7 @@
                 <li>наименование организации, выдавшей паспорт: <b><span th:text="${formParams.vehicleTechData.vehiclePassportIssuer}"/></b>.</li>
             </ul>
             <p style="text-indent: 20px; margin: 20px; text-align: justify; max-width: 620px" > 
-                1.3. По согласованию Сторон стоимость автомобиля составляет: <b><span th:text="${formParams.price}"/></b> <b><span th:text="${formParams.priceText}"/></b> рублей.
+                1.3. По согласованию Сторон стоимость автомобиля составляет: <b><span th:text="${formParams.formattedPrice()}"/></b> <b><span th:text="${formParams.priceText}"/></b> рублей.
             </p>
             <p style="text-indent: 20px; margin: 20px; text-align: justify; max-width: 620px" > 
                 1.4. На момент продажи автомобиль не продан, не заложен, свободен от любых прав третьих лиц и иных обременений.
@@ -156,17 +156,17 @@
             </h4>
             <p/>
             <p style="text-indent: 20px; margin: 20px; text-align: left; max-width: 620px" > 
-                Продавец <b><span th:text="${formParams.seller.getShortFIO()}" /></b> ___________________
+                Продавец (<b><span th:text="${formParams.seller.getShortFIO()}" /></b>) ___________________
             </p>
             <p style="text-indent: 100px; margin: 20px; text-align: left; max-width: 620px" > 
-                <b style="margin: 50px; font-size: small">подпись</b>
+                <b style="margin: 130px; font-size: small">подпись</b>
             </p>
             <p/>
             <p style="text-indent: 20px; margin: 20px; text-align: left; max-width: 620px" > 
-                Покупатель <b><span th:text="${formParams.buyer.getShortFIO()}" /></b> ___________________
+                Покупатель (<b><span th:text="${formParams.buyer.getShortFIO()}" /></b>) ___________________
             </p>
             <p style="text-indent: 100px; margin: 20px; text-align: left; max-width: 620px" > 
-                <b style="margin: 50px; font-size: small">подпись</b>
+                <b style="margin: 130px; font-size: small">подпись</b>
             </p>
 
         </section>

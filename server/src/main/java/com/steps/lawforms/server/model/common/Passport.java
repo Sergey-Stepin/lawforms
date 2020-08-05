@@ -7,6 +7,8 @@ package com.steps.lawforms.server.model.common;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,15 +26,20 @@ public class Passport {
     
     private String secondSerialNum;
     
+    @NotEmpty(message = "Незаполено поле")
     private String number;
     
+    @Past
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate issued;
     
+    @NotEmpty(message = "Незаполено поле")
     private String issuer;
     
+    @NotEmpty(message = "Незаполено поле")
     private String issuerDepartmentCode;
     
+    @NotEmpty(message = "Незаполено поле")
     private String currentAddress;
     
     public String getFullPassportNum(){

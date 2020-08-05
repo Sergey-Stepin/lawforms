@@ -28,46 +28,55 @@
                 <form 
                     enctype="multipart/form-data"
                     th:method="POST"
-                    th:object="${formParams}"                    
+                    th:object="${seller}"
                     th:action="@{/form/naturalperson/agreement/autodeal/seller_params}">
 
                     <p/>
                     <label>Фамилия</label>
-                    <input type="text" th:field="*{seller.lastName}"/>
+                    <input type="text" th:field="*{person.lastName}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('person.lastName')}" th:errors="*{person.lastName}" th:style="${'color: red;'}"/>
                     
                     <p/>
                     <label>Имя</label>
-                    <input type="text" th:field="*{seller.firstName}"/>
+                    <input type="text" th:field="*{person.firstName}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('person.firstName')}" th:errors="*{person.firstName}" th:style="${'color: red;'}"/>
                     
                     <p/>
                     <label>Отчество</label>
-                    <input type="text" th:field="*{seller.middleName}"/>
+                    <input type="text" th:field="*{person.middleName}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('person.middleName')}" th:errors="*{person.middleName}" th:style="${'color: red;'}"/>
                     
                     <p/>
                     <label>Дата рождения</label>
-                    <input type="date" th:field="*{seller.birthday}"/>
+                    <input type="date" th:field="*{person.birthday}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('person.birthday')}" th:errors="*{person.birthday}" th:style="${'color: red;'}"/>
                     
                     <p/>
                     <label>Серия, номер паспорта</label>
-                    <input type="text" th:field="*{sellerPassport.firstSerialNum}" pattern="\d{2}" size="2"/>-
-                    <input type="text" th:field="*{sellerPassport.secondSerialNum}" pattern="\d{2}" size="2"/>-
-                    <input type="text" th:field="*{sellerPassport.number}" pattern="\d{6}" size="6"/>
+                    <input type="text" th:field="*{personPassport.firstSerialNum}" pattern="\d{2}" size="2"/>-
+                    <input type="text" th:field="*{personPassport.secondSerialNum}" pattern="\d{2}" size="2"/>-
+                    <input type="text" th:field="*{personPassport.number}" pattern="\d{6}" size="6"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('personPassport.number')}" th:errors="*{personPassport.number}" th:style="${'color: red;'}"/>
                     
                     <p/>
                     <label>Дата выдачи паспорта</label>
-                    <input type="date" th:field="*{sellerPassport.issued}"/>
+                    <input type="date" th:field="*{personPassport.issued}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('personPassport.issued')}" th:errors="*{personPassport.issued}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Кем выдан</label>
-                    <input type="text" th:field="*{sellerPassport.issuer}"/>
+                    <input type="text" th:field="*{personPassport.issuer}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('personPassport.issuer')}" th:errors="*{personPassport.issuer}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Код подразделения</label>
-                    <input type="text" th:field="*{sellerPassport.issuerDepartmentCode}"/>
+                    <input type="text" th:field="*{personPassport.issuerDepartmentCode}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('personPassport.issuerDepartmentCode')}" th:errors="*{personPassport.issuerDepartmentCode}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <label>Адрес проживания (по паспорту)</label>
-                    <input type="text" th:field="*{sellerPassport.currentAddress}"/>
+                    <input type="text" th:field="*{personPassport.currentAddress}"/>
+                    <span class="validationError" th:if="${#fields.hasErrors('personPassport.currentAddress')}" th:errors="*{personPassport.currentAddress}" th:style="${'color: red;'}"/>
 
                     <p/>
                     <input type="submit" value="Назад" name="_prev" />                    

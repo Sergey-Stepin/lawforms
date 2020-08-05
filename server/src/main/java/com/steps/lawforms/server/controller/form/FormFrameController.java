@@ -53,10 +53,10 @@ public class FormFrameController {
             @ModelAttribute("formParams") iFormParameters formParams,
             @ModelAttribute("fragmentPath") String fragmentPath,
             HttpServletResponse response,
-            SessionStatus status,
+            //SessionStatus status,
             Model model) throws IOException {
 
-        status.setComplete();
+        //status.setComplete();
 
         LOGGER.debug("### fragmentPath=" + fragmentPath);
         LOGGER.debug("### formParams=" + formParams);
@@ -75,10 +75,10 @@ public class FormFrameController {
             @ModelAttribute("formParams") iFormParameters formParams,
             @ModelAttribute("formName") String formName,
             @ModelAttribute("fragmentPath") String fragmentPath,
-            SessionStatus status,
+            //SessionStatus status,
             Model model) throws IOException {
 
-        status.setComplete();
+        //status.setComplete();
 
         LOGGER.debug("### fragmentPath=" + fragmentPath);
         LOGGER.debug("### formParams=" + formParams);
