@@ -3,8 +3,10 @@ target/
 /server/mvn/wrapper/maven-wrapper.jar
 /server/target
 
-/server/logs/
+server/logs/
 *.log
+
+docker/
 
 ### NetBeans ###
 /server/nbproject/private/
