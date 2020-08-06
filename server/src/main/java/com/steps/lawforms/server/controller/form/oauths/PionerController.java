@@ -39,9 +39,6 @@ import org.springframework.web.bind.support.SessionStatus;
 @SessionAttributes({"formParams", "fragmentPath", "formName"})
 public class PionerController {
 
-    @Autowired
-    private PdfService templateToPdfService;
-
     private final static Logger LOGGER = LogManager.getLogger();
 
     @ModelAttribute("availableBirthPlaces")
@@ -74,7 +71,7 @@ public class PionerController {
         prepareFromParams(probForm);
         
         model.addAttribute("formParams", probForm);
-        model.addAttribute("formName", new String("PionerOath"));
+        model.addAttribute("formName", "PionerOath");
         model.addAttribute("fragmentPath", "form/oauths/pioner/pioner_oath_template");
         
         response.addHeader("Cache-Control", "no cache");

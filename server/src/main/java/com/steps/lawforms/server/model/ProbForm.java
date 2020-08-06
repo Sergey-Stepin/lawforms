@@ -5,7 +5,6 @@
  */
 package com.steps.lawforms.server.model;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import lombok.Data;

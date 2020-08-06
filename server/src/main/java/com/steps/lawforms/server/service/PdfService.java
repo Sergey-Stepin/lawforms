@@ -40,7 +40,6 @@ public class PdfService {
     public void writeHtmlToPdf(String html, OutputStream pdfOutputStream) throws IOException {
         ConverterProperties converterProperties = new ConverterProperties();
         FontProvider fontProvider = new DefaultFontProvider();
-        //fontProvider.addFont("C:\\_project\\git\\autodoc\\server\\src\\main\\resources\\fonts/ARIALUNI.TTF");
         converterProperties.setFontProvider(fontProvider);
 
         HtmlConverter.convertToPdf(html, pdfOutputStream);
@@ -50,7 +49,7 @@ public class PdfService {
         try (ByteArrayOutputStream baos = createTemporaryOutputStream()) {
         
             String html = this.parseThymeleafTemplate(templateName, context);
-            LOGGER.info("HTML length=" + html.length());
+            LOGGER.debug("HTML length=" + html.length());
 
             writeHtmlToPdf(html, baos);
             return baos;

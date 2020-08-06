@@ -1,0 +1,1 @@
+docker run --rm -p80:8080 -e TZ=Europe/Moscow --name lawforms-server-d lawforms-server

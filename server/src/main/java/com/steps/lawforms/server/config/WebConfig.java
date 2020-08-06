@@ -42,7 +42,6 @@ public class WebConfig implements WebMvcConfigurer, AsyncConfigurer{
 
     @Bean
     public ThreadPoolTaskExecutor ThreadPoolTaskExecutor() {
-        System.out.println(" prepare ThreadPoolTaskExecutor");
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(5);
         LOGGER.info(" --- ThreadPoolTaskExecutor is created");

@@ -158,7 +158,7 @@ public class AutoDealController {
             Model model,
             @ModelAttribute("deal") AutoDeal deal) {
 
-        System.out.println("### AutoDeal deal=" + deal);
+        LOGGER.debug("### AutoDeal deal=" + deal);
 
         if (!deal.isImmidiateTransfer()) {
             return "form/naturalperson/agreement/autodeal/transfer_terms";

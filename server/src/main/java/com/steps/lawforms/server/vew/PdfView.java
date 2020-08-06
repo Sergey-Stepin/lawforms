@@ -20,8 +20,6 @@ import org.springframework.web.servlet.view.AbstractView;
  */
 public class PdfView extends AbstractView {
 
-    private static final Logger LOGGER = LogManager.getLogger();
-
     private final ByteArrayOutputStream baos;
 
     public PdfView(ByteArrayOutputStream baos) {
