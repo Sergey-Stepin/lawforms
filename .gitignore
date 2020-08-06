@@ -1,0 +1,15 @@
+HELP.md
+target/
+/server/mvn/wrapper/maven-wrapper.jar
+/server/target
+
+/server/logs/
+*.log
+
+### NetBeans ###
+/server/nbproject/private/
+/server/nbbuild/
+/server/dist/
+/server/nbdist/
+/server/.nb-gradle/
+/serverbuild/
